@@ -98,23 +98,18 @@ void loop(){
   int sum_left=0, sum_right=0;
   for(int i=2; i<=5; i++) sum_left+=sensors[i];
   for(int i=6; i<=9; i++) sum_right+=sensors[i];
-  if(v=="00000000" || v=="11111111")
-  {
-    stopmotion();
-  }
-  /* The only stopping condition is all black i.e when all are zero 
-   * In other cases even there is gap moving forward.
-   */
-  else if(v=="11111111")   
+  if(v=="11111111")
   {
     forward();
+  }else if(v=="00000000"){
+    delay(2000);
+    stopmotion();
   }
+  /* The only stopping condition is all black i.e when all are zero
+   * In other cases even there is gap moving forward.
+   */
 
-  else if(sensors[5]==1 || sensors[7]==0) soft_left();
-  else if(sensors[6]==1 || sensors[4]==0) soft_right();
+  else if(sum_left>sum_right) soft_right();
+  else if(sum_left<sum_right) soft_left();
   else forward();
 }
-
-  
-  
-  
