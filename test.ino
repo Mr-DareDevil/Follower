@@ -92,9 +92,7 @@ String value(){
 void loop(){
   input_sensors();
   String v=value();
-  /* When the bot reaches the end box all are black
-   *  
-   */
+
   int sum_left=0, sum_right=0;
   for(int i=2; i<=5; i++) sum_left+=sensors[i];
   for(int i=6; i<=9; i++) sum_right+=sensors[i];
@@ -102,13 +100,8 @@ void loop(){
   {
     forward();
   }else if(v=="00000000"){
-    delay(2000);
-    stopmotion();
+    forward();   
   }
-  /* The only stopping condition is all black i.e when all are zero
-   * In other cases even there is gap moving forward.
-   */
-
   else if(sum_left>sum_right) soft_right();
   else if(sum_left<sum_right) soft_left();
   else forward();
